@@ -137,7 +137,7 @@
 						"type": "tuple[]"
 					}
 				],
-				"stateMutability": "nonpayable",
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -230,11 +230,11 @@
 			]
 		},
 		"contracts/DDR.sol": {
-			"keccak256": "0x8e673b6e27fb8be1a5e002cda998ea2761e99f889779e72182f7f8af44ad99a7",
+			"keccak256": "0xa3dd922c416e69a86e5c66e2698421565267d1e6a4701aedaabcf489bb32ef63",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://e40b18e81c0925918f676eb182781c5c5d546cbb5462b34b8420e043ad67139e",
-				"dweb:/ipfs/QmaqThb86fR72SufZ1d9kphLwqdHUxMFfT2iRiD3rPj7p9"
+				"bzz-raw://520eaaa680884d14881373f611df8ee1824a55fbd2feac31da5ef33e37600d88",
+				"dweb:/ipfs/QmZETgKnmAyjDrHEuG5u4eCFwBK58rydX5JM9NkBde7upe"
 			]
 		}
 	},

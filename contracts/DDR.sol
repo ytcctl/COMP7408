@@ -105,13 +105,42 @@ contract DDR {
     }
 
     //TODO: complete this function
-    function checkCarPlate(string memory carplate) external returns (CaseRecord[] memory) {
+    function checkCarPlate(string memory carplate) 
+        external view returns (CaseRecord[] memory) {
         // Hint: also use _iAmNotGuilty
+        CaseRecord[] storage reports = _dangerousCase[carplate];
+        uint256 count = 0;
+        for (uint256 i=0; i < reports.length; i++) {
+            if (
+                !reports[i].open &&
+                reports[i].accepted &&
+                !_iAmNotGuilty[reports[i].caseId]
+            ) {
+                count++;
+            }
+        } 
+
+        CaseRecord[] memory result = new CaseRecord[](count);
+        uint256 j = 0;
+        for (uint256 i=0; i<reports.length; i++){
+            if(
+                !reports[i].open &&
+                reports[i].accepted &&
+                !_iAmNotGuilty[reports[i].caseId]
+            ) {
+                result[j] = reports[i];
+                j++;
+            }
+
+        }      
+        return result;
     }
 
     // TODO: complete this function
     function acquitDriver(uint256 caseId) external {
         // Hint: add to _iAmNotGuilty
+        require(msg.sender==_owner, "only owner can acquit a report");
+        _iAmNotGuilty[caseId] = true;
     }
 }
 
@@ -119,10 +148,19 @@ contract DDR {
 // Q2. Proposed Functions
 ////////////////////////////////////////////////////////////////////////////
 /*
-1. Propose function f1, because (background)
-function f1 takes inputs: a, b, c and output x.
-function f1, can be useful for (practicality)
-2. Propose function f2, ...
-function f2 takes inputs: a, b, c and output x.
-function f2, can be useful for ....
+1. Propose function getTotalReports, because (background)
+For transparency and monitoring of platform usage,
+this function returns the total number of reports ever submitted.
+In our design, since _nextCaseId is incremented for each new report,
+the total number of reports is _nextCaseId - 1.
+
+     function getTotalReports() external view returns (uint256) {
+         return _nextCaseId - 1;
+     }
+
+2. Propose function getReportsByReporter
+This function would allow a user (or moderator) to quickly fetch all 
+cases submitted by a particular reporter. Such a function can help in identifying 
+users who either abuse the system or who are consistent, reliable sources.
+
 */
