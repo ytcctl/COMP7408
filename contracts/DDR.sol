@@ -81,9 +81,27 @@ contract DDR {
         }
 
     // TODO: complete this function
-    function verify(uint256 caseId, bool isAccepted) external returns (bool)
+    function verify(uint256 caseId, bool isAccepted)  external returns (bool)
     {
         // Hint: study ERC20 interface
+        require(msg.sender == _owner, "Alert: Only owner can verify the report");
+
+        string memory carplate = _caseToCar[caseId];
+        require(bytes(carplate).length >0, "Alert:Invalid carplate.");
+        
+        uint256 index = _caseIndex[caseId];
+        CaseRecord storage reportCase = _dangerousCase[carplate][index];
+        require(reportCase.open ==true, "This case is already verified");
+
+        reportCase.open = false;
+        reportCase.accepted = isAccepted;
+
+        if (isAccepted) {
+            bool success = _DDToken.transferFrom(_owner, reportCase.reporter, 1);
+            require(success, "Token transfer is failed");
+        }
+
+        return true;
     }
 
     //TODO: complete this function
