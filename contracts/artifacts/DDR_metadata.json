@@ -117,11 +117,6 @@
 								"type": "string"
 							},
 							{
-								"internalType": "bool",
-								"name": "status",
-								"type": "bool"
-							},
-							{
 								"internalType": "address",
 								"name": "reporter",
 								"type": "address"
@@ -235,11 +230,11 @@
 			]
 		},
 		"contracts/DDR.sol": {
-			"keccak256": "0xe911ee29f8619b6a5707260aecc8ec9fd14914d8d28288a0e9c577c4a413e835",
+			"keccak256": "0x5caf73fc82849ac17ec2f37d1b4edbcd8891c634dc008d919f0fb3ebdcf454df",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://f7470e150dc7972e9c4550890e247f5811f2b3a2ecfed0f488960aaa4c63eb26",
-				"dweb:/ipfs/QmXjREDQ4XarJSANHWHWqX8hBWGLSWRrCh1snfnFTAD4Yz"
+				"bzz-raw://b1c0d68780621fbce70ea5712de7fb08c753c87adf91b87176da015a0bddec94",
+				"dweb:/ipfs/QmXSLZtFgDMSgqKWcEvonz9Fwjy1KQxoG1vvEorx8ZpAUy"
 			]
 		}
 	},

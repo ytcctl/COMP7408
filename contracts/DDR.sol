@@ -16,7 +16,7 @@ contract DDR {
         string carplate;
         string streetAddress;
         string evidenceLink;
-        bool status;
+        //bool status;
 
         address reporter;
         bool open; //true when report is pending verification; false when closed.
@@ -49,14 +49,36 @@ contract DDR {
     constructor(address tokenAddr, address owner_) {
         _DDToken = IERC20(tokenAddr);
         _owner = owner_;
+        _nextCaseId =1; //Start counting case IDs from 1. 
     }
 
     
     // TODO: complete this function
-    function report(string memory carplate, string memory streetAddress, string memory evidenceLink) external returns (uint256)
-    {
-        // Hint: you can create sequential case ID
-    }
+    function report(string memory carplate, 
+                    string memory streetAddress, 
+                    string memory evidenceLink) external returns (uint256)
+        {
+            // Hint: you can create sequential case ID
+            uint256 caseId = _nextCaseId;
+            _nextCaseId++;
+
+            CaseRecord memory newCase = CaseRecord({
+                caseId : caseId, 
+                reporter        : msg.sender, 
+                carplate    : carplate, 
+                streetAddress   : streetAddress, 
+                evidenceLink     : evidenceLink,
+                open          : true,
+                accepted       : false 
+            });
+
+            _dangerousCase[carplate].push(newCase);
+            _caseToCar[caseId] = carplate;
+            _caseIndex[caseId] = _dangerousCase[carplate].length -1;
+
+            emit DangerousReported(msg.sender, carplate, streetAddress, evidenceLink);
+            return caseId;
+        }
 
     // TODO: complete this function
     function verify(uint256 caseId, bool isAccepted) external returns (bool)
