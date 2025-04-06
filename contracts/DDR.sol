@@ -36,12 +36,13 @@ contract DDR {
     // Address of contract owner
     address private _owner;
 
-    //additional data type
-    //mappings to lookup a CaseRecord by its unique caseId
+    //additional data type and mapping
     //_caseToCar maps the caseId to the associated car plate.
     mapping(uint256 => string) private _caseToCar;
     // _caseIndex maps a caseId to its index in the _dangerousCase[carplate] array.
     mapping(uint256 => uint256) private _caseIndex;
+    // Global case counter for sequential case IDs
+    uint256 private _nextCaseId;
 
     event DangerousReported(address indexed from, string indexed carplate, string streetAddress, string evidenceLink);
 
