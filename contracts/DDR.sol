@@ -21,7 +21,6 @@ contract DDR {
         address reporter;
         bool open; //true when report is pending verification; false when closed.
         bool accepted; //true if evidence accepted, false if rejected. 
-
     }
 
     // Hash table for address to reported case
