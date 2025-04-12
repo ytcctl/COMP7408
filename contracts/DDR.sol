@@ -80,7 +80,7 @@ contract DDR {
         }
 
     // TODO: complete this function
-    function verify(uint256 caseId, bool isAccepted)  external returns (bool)
+    function verify(uint256 caseId, bool isAccepted) external returns (bool)
     {
         // Hint: study ERC20 interface
         require(msg.sender == _owner, "Alert: Only owner can verify the report");
@@ -96,7 +96,7 @@ contract DDR {
         reportCase.accepted = isAccepted;
 
         if (isAccepted) {
-            bool success = _DDToken.transferFrom(_owner, reportCase.reporter, 1);
+            bool success = _DDToken.transferFrom(_owner, reportCase.reporter, 0);
             require(success, "Token transfer is failed");
         }
 

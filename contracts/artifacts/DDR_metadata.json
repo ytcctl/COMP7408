@@ -53,10 +53,55 @@
 				"type": "event"
 			},
 			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "caseId",
+						"type": "uint256"
+					}
+				],
+				"name": "DriverAcquitted",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "caseId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "bool",
+						"name": "accepted",
+						"type": "bool"
+					}
+				],
+				"name": "ReportVerified",
+				"type": "event"
+			},
+			{
+				"inputs": [],
+				"name": "REWARD_AMOUNT",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "uint256",
-						"name": "caseId",
+						"name": "",
 						"type": "uint256"
 					}
 				],
@@ -117,19 +162,19 @@
 								"type": "string"
 							},
 							{
-								"internalType": "address",
-								"name": "reporter",
-								"type": "address"
-							},
-							{
 								"internalType": "bool",
-								"name": "open",
+								"name": "isOpen",
 								"type": "bool"
 							},
 							{
 								"internalType": "bool",
 								"name": "accepted",
 								"type": "bool"
+							},
+							{
+								"internalType": "address",
+								"name": "reporter",
+								"type": "address"
 							}
 						],
 						"internalType": "struct DDR.CaseRecord[]",
@@ -196,18 +241,59 @@
 		],
 		"devdoc": {
 			"kind": "dev",
-			"methods": {},
+			"methods": {
+				"acquitDriver(uint256)": {
+					"params": {
+						"caseId": "The unique identifier of the report to acquit."
+					}
+				},
+				"checkCarPlate(string)": {
+					"params": {
+						"carplate": "The car plate number to check."
+					},
+					"returns": {
+						"_0": "offenses An array of CaseRecord structs representing the offenses."
+					}
+				},
+				"report(string,string,string)": {
+					"returns": {
+						"_0": "caseId A unique identifier for the report."
+					}
+				},
+				"verify(uint256,bool)": {
+					"params": {
+						"caseId": "The unique identifier of the report to verify.",
+						"isAccepted": "A boolean indicating whether the evidence is accepted."
+					},
+					"returns": {
+						"_0": "success A boolean indicating if the verification succeeded."
+					}
+				}
+			},
 			"version": 1
 		},
 		"userdoc": {
 			"kind": "user",
-			"methods": {},
+			"methods": {
+				"acquitDriver(uint256)": {
+					"notice": "Acquit (retract) an offense record in case of mistake or insufficient evidence. The token reward that has been distributed will not be returned. Only the contract owner can perform this action."
+				},
+				"checkCarPlate(string)": {
+					"notice": "Check the list of verified, accepted offenses associated with a car plate. Cases that have been acquitted are removed from the offense list."
+				},
+				"report(string,string,string)": {
+					"notice": "Report a dangerous driver by providing car plate, street address, and evidence link."
+				},
+				"verify(uint256,bool)": {
+					"notice": "Verify a report (only callable by the contract owner). If the evidence is accepted, the reporter is rewarded 1 DD token. The report is then closed for further modification."
+				}
+			},
 			"version": 1
 		}
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/DDR.sol": "DDR"
+			"contracts/DDR2.sol": "DDR"
 		},
 		"evmVersion": "cancun",
 		"libraries": {},
@@ -229,12 +315,12 @@
 				"dweb:/ipfs/QmeTTxZ7qVk9rjEv2R4CpCwdf8UMCcRqDNMvzNxHc3Fnn9"
 			]
 		},
-		"contracts/DDR.sol": {
-			"keccak256": "0xa3dd922c416e69a86e5c66e2698421565267d1e6a4701aedaabcf489bb32ef63",
+		"contracts/DDR2.sol": {
+			"keccak256": "0x51cbc6a14fddf8b86d4a24f79eea4d2fd07c7c0bc6c13d2f41d44ff13d9748bf",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://520eaaa680884d14881373f611df8ee1824a55fbd2feac31da5ef33e37600d88",
-				"dweb:/ipfs/QmZETgKnmAyjDrHEuG5u4eCFwBK58rydX5JM9NkBde7upe"
+				"bzz-raw://dffc5b395f7d17a78b24c8c140662a3a24453b43c458d372b9b530eec2b9175e",
+				"dweb:/ipfs/QmXSHzQ8vv25ukmjt87RLxrwiHh5kjRaf2bX65bVQQYGgV"
 			]
 		}
 	},
